@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Yodju</title>
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link type="text/css" rel="stylesheet" th:href="@{/bootstrap/bootstrap.min.css}"/>
+    <link type="text/css" rel="stylesheet" th:href="@{/css/main_style.css}"/>
+    <link type="text/css" rel="stylesheet" th:href="@{/css/side_bar.css}"/>
+</head>
+<body>
+
+
+<div class="wrapper d-flex align-items-stretch">
+    <spa id="student_add_page_data_element" style="visibility: hidden" th:data-url="${domainName}"></spa>
+    <!-- Sidebar -->
+    <div th:replace="~{fragments/sidebar::sidebar}"></div>
+    <!-- End of Sidebar -->
+
+    <!-- Page Content  -->
+    <div id="content" class="">
+
+        <!-- Topbar -->
+        <div th:replace="~{fragments/topbar::topbar}"></div>
+        <!-- End of Topbar -->
+
+        <!-- Page -->
+        <div class="main_body px-2 pt-4 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h1 class="h3 mb-2 text-gray-800"
+                        th:text="${isUpdate ? 'Обновить студент':'Добавить нового студента'}"></h1>
+
+                    <form method="post"
+                          th:action="@{${isUpdate ?'/student/update':'/student/add'}}"
+                          th:object="${studentObj}" name="student" id="student" enctype="multipart/form-data">
+
+                        <input type="hidden" name="id" th:field="*{id}">
+                        <br>
+                        <div class="form_header">Информация о студенте</div>
+                        <hr class="form_hr">
+                        <div class="row">
+                            <div class="row pt-2 pb-2">
+                                <div class="file-upload image-file-upload col-7" style="background-color: white">
+                                    <div class="file-select">
+                                        <div class="file-select-button">Выберите изображение</div>
+                                        <input type="file" name="studentPhoto" id="studentPhoto" accept="image/*">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4">
+                                <label for="name">Имя:</label>
+                                <input type="text" id="name" class="form-control" name="name"
+                                       placeholder="Name"
+                                       th:field="*{name}" required>
+                            </div>
+                            <div class="col-4">
+                                <label for="surname">Фамилия:</label>
+                                <input type="text" id="surname" class="form-control" name="surname"
+                                       placeholder="Surname"
+                                       th:field="*{surname}" required>
+                            </div>
+                            <div class="col-4">
+                                <label for="familyName">Отчество:</label>
+                                <input type="text" id="familyName" class="form-control" name="familyName"
+                                       placeholder="Family Name"
+                                       th:field="*{familyName}" required>
+                            </div>
+                            <div class="col-4">
+                                <label for="birthday">День рождения:</label>
+                                <input type="date" id="birthday" class="form-control" name="birthday"
+                                       placeholder="birthday"
+                                       th:field="*{birthday}" required>
+                                <div class="col-4">
+                                    <label for="phoneNumId">Контакт:</label>
+                                    <input type="text" id="phoneNumId" class="form-control" name="phoneNum"
+                                           placeholder="Phone Number"
+                                           th:field="*{phone}" required>
+                                </div>
+                                <div class="col-4">
+                                    <label for="marriageStatus">Семейное положение:</label>
+                                    <select id="marriageStatus" name="marriageStatus" th:field="*{marriageStatus}"
+                                            class="custom-select">
+                                        <option th:each="marriageStatus : ${T(com.company.exportToPdfAndExcel.enums.MarriageStatus).values()}"
+                                                th:value="${marriageStatus}" th:text="${marriageStatus}"></option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-4">
+                                <label for="citizenship">Гражданство :</label>
+                                <input type="text" id="citizenship" class="form-control" name="citizenship"
+                                       placeholder="Citizenship"
+                                       th:field="*{citizenship}" required>
+                            </div>
+                            <div class="col-4">
+                                <label for="birthPlace">Место рождения:</label>
+                                <input type="text" id="birthPlace" class="form-control" name="birthPlace"
+                                       placeholder="Birth Place"
+                                       th:field="*{birthPlace}" required>
+                            </div>
+                            <div class="col-4">
+                                <label for="gender">Пол:</label>
+                                <select id="gender" name="gender" th:field="*{gender}"
+                                        class="custom-select">
+                                    <option th:each="gender : ${T(com.company.exportToPdfAndExcel.enums.Gender).values()}"
+                                            th:value="${gender}" th:text="${gender}"></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-1">
+                                <label for="seriya">Серия:</label>
+                                <input type="text" id="seriya"
+                                        class="form-control" name="seriya"
+                                       placeholder="AA"
+                                       th:field="*{passportSerial}" required>
+                            </div>
+                            <div class="col-2">
+                                <label for="passportNumber">Номер:</label>
+                                <input type="text" id="passportNumber"
+                                       class="form-control" name="passportNumber"
+                                       placeholder="Passport Number"
+                                       th:field="*{passportNumber}" required>
+                            </div>
+                            <div class="col-3">
+                                <label for="pinfl">ПИНФЛ :</label>
+                                <input type="text" id="pinfl" class="form-control" name="pinfl"
+                                       placeholder="pinfl"
+                                       th:field="*{pinfl}" required>
+                            </div>
+                            <br>
+                            <br>
+                            <div class="col-3">
+                                <label for="issueDate">Дата выдачи:</label>
+                                <input type="date" id="issueDate"
+                                       class="form-control" name="passportNumber"
+                                       placeholder="Issue Date" th:value="*{issueDate}"
+                                       th:field="*{issueDate}" required>
+                            </div>
+                            <div class="col-3">
+                                <label for="expiryDate">Срок годности до:</label>
+                                <input type="date" id="expiryDate"
+                                       class="form-control" name="expiryDate"
+                                       placeholder="Expiry Date" th:value="*{expiryDate}"
+                                       th:field="*{expiryDate}" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                        <div class="col-1">
+                            <label for="workplace">рабочее место:</label>
+                            <input type="text" id="workplace" class="form-control" name="workplace"
+                                   placeholder="workplace"
+                                   th:field="*{workplace}" required>
+                        </div>
+                        </div>
+
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+
+                        <div class="row justify-content-end pt-2 pb-2">
+                            <div class="col-2">
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary">Сохранить</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- Page  End-->
+    </div>
+</div>
+<script>
+    if (![[${isUpdate}]]) {
+        document.getElementById("studentPhoto").required = true;
+
+    }
+</script>
+
+
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/jquery.js}"></script>
+<script th:src="@{/js/popper.js}"></script>
+<script th:src="@{/js/main.js}"></script>
+<script th:src="@{/js/sidebar.js}"></script>
+<script th:src="@{/js/file_upload.js}"></script>
+
+
+</body>
+</html>

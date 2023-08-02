@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Yodju</title>
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link type="text/css" rel="stylesheet" th:href="@{/bootstrap/bootstrap.min.css}"/>
+    <link type="text/css" rel="stylesheet" th:href="@{/css/main_style.css}"/>
+    <link type="text/css" rel="stylesheet" th:href="@{/css/side_bar.css}"/>
+
+</head>
+<body>
+
+
+<div class="wrapper d-flex align-items-stretch">
+
+    <!-- Sidebar -->
+    <div th:replace="~{fragments/sidebar::sidebar}"></div>
+    <!-- End of Sidebar -->
+
+    <!-- Page Content  -->
+    <div id="content" class="">
+
+        <!-- Topbar -->
+        <div th:replace="~{fragments/topbar::topbar}"></div>
+        <!-- End of Topbar -->
+
+        <!-- Page -->
+        <div class="main_body px-2 pt-4">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between p-1">
+                    <div>
+                        <h1 class="h3 mb-2 text-gray-800">Студенты</h1>
+                    </div>
+                    <div><a th:href="@{/student/go/add}" class="btn btn-success" role="button"
+                            aria-pressed="true" data-toggle="tooltip" data-placement="bottom" title="Добавить студента"><i
+                            class="fa fa-plus"></i></a>
+                    </div>
+                    <div><a th:href="@{/student/users/export/excel}" class="btn btn-success" role="button"
+                            aria-pressed="true" data-toggle="tooltip" data-placement="bottom" title="Добавить студента"><i
+                            class="fa fa-download"></i>Экспорт Excel</a>
+                    </div>
+                </div>
+
+
+                <div class="card-body p-1">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                            <tr>
+                                <th></th>
+                                <th>Ф.И.О</th>
+                                <th>Пол</th>
+                                <th>Действие</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="student:${dtoList}">
+                                <td th:text="${student.id}"></td>
+                                <td><a th:text="${student.name}+' '+${student.surname}+' '+${student.familyName}"></a>
+                                </td>
+                                <td th:text="${student.gender}"></td>
+
+                                <td>
+
+                                    <a th:href="@{'/student/go/update/'+${student.id}}"
+                                       class="btn btn-warning" role="button" aria-pressed="true"
+                                       data-toggle="tooltip" data-placement="bottom" title="Редактироать"><i
+                                            class="fa fa-edit"></i></a>
+                                    <a th:href="@{'/student/pdf/'+${student.id}}"
+                                       class="btn btn-primary" role="button" aria-pressed="true"
+                                       data-toggle="tooltip" data-placement="bottom" title="Редактироать"><i
+                                            class="fa fa-user"></i></a>
+                                    <a th:href="@{'/student/delete/'+${student.id}}"
+                                       class="btn btn-danger" role="button" aria-pressed="true"
+                                       data-toggle="tooltip" data-placement="bottom" title="Редактироать"><i
+                                            class="fa fa-trash"></i></a>
+
+                                    </button>
+                                </td>
+
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!-- Page  End-->
+    </div>
+</div>
+
+
+
+
+<script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/jquery.js}"></script>
+<script type="text/javascript" th:src="@{/js/popper.js}"></script>
+<script type="text/javascript" th:src="@{/js/bootstrap.bundle.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/main.js}"></script>
+<script type="text/javascript" th:src="@{/js/sidebar.js}"></script>
+<script type="text/javascript" th:src="@{/js/student.js}"></script>
+
+</body>
+</html>

@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile</title>
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link type="text/css" rel="stylesheet" th:href="@{/bootstrap/bootstrap.min.css}"/>
+    <link type="text/css" rel="stylesheet" th:href="@{/css/main_style.css}"/>
+    <link type="text/css" rel="stylesheet" th:href="@{/css/side_bar.css}"/>
+    <style>
+        body {
+            margin-top: 20px;
+        }
+
+        .card-style1 {
+            box-shadow: 0px 0px 10px 0px rgb(89 75 128 / 9%);
+        }
+
+        .border-0 {
+            border: 0 !important;
+        }
+
+        .card {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+            word-wrap: break-word;
+            background-color: #fff;
+            background-clip: border-box;
+            border: 1px solid rgba(0, 0, 0, .125);
+            border-radius: 0.25rem;
+        }
+
+        section {
+            padding: 120px 0;
+            overflow: hidden;
+            background: #fff;
+        }
+
+        .mb-2-3, .my-2-3 {
+            margin-bottom: 2.3rem;
+        }
+
+        .section-title {
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .text-primary {
+            color: #ceaa4d !important;
+        }
+
+        .text-secondary {
+            color: #15395A !important;
+        }
+
+        .font-weight-600 {
+            font-weight: 600;
+        }
+
+        .display-26 {
+            font-size: 1.3rem;
+        }
+
+        @media screen and (min-width: 992px) {
+            .p-lg-7 {
+                padding: 4rem;
+            }
+        }
+
+        @media screen and (min-width: 768px) {
+            .p-md-6 {
+                padding: 3.5rem;
+            }
+        }
+
+        @media screen and (min-width: 576px) {
+            .p-sm-2-3 {
+                padding: 2.3rem;
+            }
+        }
+
+        .p-1-9 {
+            padding: 1.9rem;
+        }
+
+        .bg-secondary {
+            background: #15395A !important;
+        }
+
+        @media screen and (min-width: 576px) {
+            .pe-sm-6, .px-sm-6 {
+                padding-right: 3.5rem;
+            }
+        }
+
+        @media screen and (min-width: 576px) {
+            .ps-sm-6, .px-sm-6 {
+                padding-left: 3.5rem;
+            }
+        }
+
+        .pe-1-9, .px-1-9 {
+            padding-right: 1.9rem;
+        }
+
+        .ps-1-9, .px-1-9 {
+            padding-left: 1.9rem;
+        }
+
+        .pb-1-9, .py-1-9 {
+            padding-bottom: 1.9rem;
+        }
+
+        .pt-1-9, .py-1-9 {
+            padding-top: 1.9rem;
+        }
+
+        .mb-1-9, .my-1-9 {
+            margin-bottom: 1.9rem;
+        }
+
+        @media (min-width: 992px) {
+            .d-lg-inline-block {
+                display: inline-block !important;
+            }
+        }
+
+        .rounded {
+            border-radius: 0.25rem !important;
+        }
+
+    </style>
+</head>
+<body>
+
+
+<div class="wrapper d-flex align-items-stretch">
+
+    <!-- Sidebar -->
+    <div th:replace="~{fragments/sidebar::sidebar}"></div>
+    <!-- End of Sidebar -->
+
+    <!-- Page Content  -->
+    <div id="content" class="">
+
+        <!-- Topbar -->
+        <div th:replace="~{fragments/topbar::topbar}"></div>
+        <!-- End of Topbar -->
+
+        <!-- Page -->
+        <div class="main_body px-2 pt-4">
+            <div class="card">
+                <div class="card-body">
+
+                    <!-- Page Heading -->
+                    <h1 class="h3 mb-2 text-gray-800">Профиль студента</h1>
+                    <br>
+                    <div><a th:href="@{'/student/export/pdf/'+${student.id}}" class="btn btn-success" role="button"
+                            aria-pressed="true" data-toggle="tooltip" data-placement="bottom" title="Добавить студента"><i
+                            class="fa fa-download"></i>Экспорт Pdf</a>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <div class="detail_header">Информация о студенте</div>
+                            <hr class="form_hr">
+                            <div class="col-lg-4">
+                                <img height="290px" width="230"
+                                     th:src="@{'/attach/open/'+${student.studentPhotoID}}" alt="...">
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <p class="detail_small">Ф.И.О</p>
+                                    <p class="detail_main"
+                                       th:text="${student.name}+' '+${student.surname}+' '+${student.familyName}"></p>
+                                </div>
+                                <div class="col-6">
+                                    <p class="detail_small">Контакт</p>
+                                    <p class="detail_main"
+                                       th:text="${student.phone}"></p>
+                                </div>
+                                <div class="col-6">
+                                    <p class="detail_small">Место рождения</p>
+                                    <p class="detail_main"
+                                       th:text="${student.birthPlace}"></p>
+                                </div>
+                                <div class="col-6">
+                                    <p class="detail_small">День рождения</p>
+                                    <p class="detail_main"
+                                       th:text="${student.birthday}"></p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="detail_header">Основная информация,Паспортные данные</div>
+                    <hr class="form_hr">
+                    <div class="row">
+                        <div class="col-4">
+                            <p class="detail_small">Гражданство:</p>
+                            <p class="detail_main" th:text="${student.citizenship}"></p>
+                        </div>
+                        <div class="col-4">
+                            <p class="detail_small">Серия:</p>
+                            <p class="detail_main" th:text="${student.passportSerial}"></p>
+                        </div>
+                        <div class="col-4">
+                            <p class="detail_small">Номер:</p>
+                            <p class="detail_main" th:text="${student.passportNumber}"></p>
+                        </div>
+                        <div class="col-4">
+                            <p class="detail_small">ПИНФЛ:</p>
+                            <p class="detail_main" th:text="${student.pinfl}"></p>
+                        </div>
+                        <div class="col-4">
+                            <p class="detail_small">Дата выдачи паспорта:</p>
+                            <p class="detail_main" th:text="${student.issueDate}"></p>
+                        </div>
+                        <div class="col-4">
+                            <p class="detail_small">Срок годности до:</p>
+                            <p class="detail_main" th:text="${student.expiryDate}"></p>
+                        </div>
+                        <div class="col-4">
+                            <p class="detail_small">Пол:</p>
+                            <p class="detail_main" th:text="${student.gender}"></p>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <p class="detail_small">Семейное положение:</p>
+                        <p class="detail_main" th:text="${student.marriageStatus}"></p>
+                    </div>
+                    <br>
+                    <br>
+
+                    <div class="col-3">
+                        <p class="detail_small">рабочее место:</p>
+                        <p class="detail_main" th:text="${student.workplace}"></p>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+        <!-- Page  End-->
+    </div>
+</div>
+
+<script>
+    var aTag = document.getElementById("studentDetailBackLink");
+    aTag.href = aTag.href + window.location.search;
+    // console.log(aTag.href)
+    // console.log(window.location.search)
+    // aTag.href = window.location;
+</script>
+
+
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/jquery.js}"></script>
+<script th:src="@{/js/popper.js}"></script>
+<script th:src="@{/js/main.js}"></script>
+<script th:src="@{/js/sidebar.js}"></script>
+
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+    <nav id="sidebar" th:fragment="sidebar">
+        <div class="p-4 pt-1">
+            <!--            <a href="#" class="img logo rounded-circle mb-5"  style="background-image: url(images/logo.jpg);"></a>-->
+            <div class="text-center">
+                <a href="https://www.kiut.uz/ru/" target="_blank">
+                    <img style="width: 100px" th:src="@{/img/logo.png}" alt="">
+                </a>
+            </div>
+            <ul class="list-unstyled components mb-5">
+
+                <li class="nav-item" th:class="${#strings.equals(activeLink,'students') ? 'nav-item active' : 'nav-item'}">
+                    <a th:href="@{/student}">Студенты</a>
+                </li>
+
+            </ul>
+
+            <div class="footer">
+                <p>
+<!--                    Copyright &copy;<script>document.write(new Date().getFullYear());</script>-->
+<!--                    All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by <a-->
+<!--                        href="https://colorlib.com" target="_blank">Colorlib.com</a>-->
+                </p>
+            </div>
+
+        </div>
+    </nav>
+
+</body>
+</html>
